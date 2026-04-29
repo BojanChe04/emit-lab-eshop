@@ -17,6 +17,7 @@ public interface BookService {
     Optional<DisplayBookDto> update(Long id, BookCreateDto bookCreateDto);
     void delete (Long id);
     Book rent (Long id);
+    Optional<DisplayBookDto> findById(Long id);
 
     Page<DisplayBookDto> findAll(int page, int size, String sortBy);
 

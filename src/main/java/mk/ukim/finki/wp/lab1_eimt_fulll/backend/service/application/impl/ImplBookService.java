@@ -92,6 +92,13 @@ public class ImplBookService implements BookService {
     }
 
     @Override
+    public Optional<DisplayBookDto> findById(Long id) {
+        return bookRepository
+                .findById(id)
+                .map(DisplayBookDto::from);
+    }
+
+    @Override
     public Page<DisplayBookDto> findAll(int page, int size, String sortBy) {
 
         Pageable pageable = PageRequest.of(

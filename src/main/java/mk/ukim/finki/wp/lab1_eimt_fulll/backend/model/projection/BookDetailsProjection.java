@@ -13,6 +13,8 @@ public interface BookDetailsProjection {
     Integer getAvailableCopies();
 
     AuthorInfo getAuthor();
+    //ova e vgenzden (nested) projection
+    //sakame del od author ama ne celiot
     interface AuthorInfo{
         String getName();
         String getSurname();
@@ -23,3 +25,21 @@ public interface BookDetailsProjection {
         }
     }
 }
+//projection raboti na nivo na query
+//primer kako izgleda rezultatoto od ova
+/*
+{
+  "id": 1,
+  "title": "Book 1",
+  "category": "NOVEL",
+  "bookState": "GOOD",
+  "availableCopies": 5,
+  "author": {
+    "name": "John",
+    "surname": "Doe",
+    "country": {
+      "name": "USA"
+    }
+  }
+}
+ */

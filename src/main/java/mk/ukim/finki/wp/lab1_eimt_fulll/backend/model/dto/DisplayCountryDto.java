@@ -9,7 +9,7 @@ public record DisplayCountryDto(
         String name,
         String continent
 ) {
-
+    //konverzija od Entity -> DTO
     public static DisplayCountryDto from(Country country) {
         return new DisplayCountryDto(
                 country.getId(),
@@ -17,7 +17,7 @@ public record DisplayCountryDto(
                 country.getContinent()
         );
     }
-
+    //helper metod za lista od entiteti -> lista od DTO
     public static List<DisplayCountryDto> from(List<Country> countries) {
         return countries.stream()
                 .map(DisplayCountryDto::from)

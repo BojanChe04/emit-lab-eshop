@@ -35,6 +35,14 @@ public class BookController {
         return ResponseEntity.ok(bookService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DisplayBookDto> findById(@PathVariable Long id) {
+        return bookService
+                .findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/paginated")
     public ResponseEntity<Page<DisplayBookDto>> findAll(
             @RequestParam(defaultValue = "0") int page,
