@@ -1,12 +1,10 @@
 package mk.ukim.finki.wp.lab1_eimt_fulll.backend.web;
 
+import mk.ukim.finki.wp.lab1_eimt_fulll.backend.model.dto.AuthorCreateDto;
 import mk.ukim.finki.wp.lab1_eimt_fulll.backend.model.dto.DisplayAuthorDto;
 import mk.ukim.finki.wp.lab1_eimt_fulll.backend.service.application.AuthorService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +28,21 @@ public class AuthorController {
         return authorService
                 .findAuthorById(id)
                 .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+    @PostMapping("/add")
+    public ResponseEntity<DisplayAuthorDto> save(@RequestBody AuthorCreateDto dto) {
+        return authorService.save(dto).map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<DisplayAuthorDto> update(@PathVariable Long id, @RequestBody AuthorCreateDto dto) {
+        return authorService.update(id, dto).map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        authorService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

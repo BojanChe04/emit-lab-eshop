@@ -1,5 +1,7 @@
 package mk.ukim.finki.wp.lab1_eimt_fulll.backend.service.application.impl;
 
+import mk.ukim.finki.wp.lab1_eimt_fulll.backend.model.Country;
+import mk.ukim.finki.wp.lab1_eimt_fulll.backend.model.dto.CountryCreateDto;
 import mk.ukim.finki.wp.lab1_eimt_fulll.backend.model.dto.DisplayCountryDto;
 import mk.ukim.finki.wp.lab1_eimt_fulll.backend.repository.CountryRepository;
 import mk.ukim.finki.wp.lab1_eimt_fulll.backend.service.application.CountryService;
@@ -26,5 +28,24 @@ public class ImplCountryService implements CountryService {
     @Override
     public Optional<DisplayCountryDto> findById(Long id) {
         return countryRepository.findById(id).map(DisplayCountryDto::from);
+    }
+
+    @Override
+    public Optional<DisplayCountryDto> save(CountryCreateDto countryCreateDto) {
+        Country country = countryCreateDto.toCountry();
+        return Optional.of(DisplayCountryDto.from(countryRepository.save(country)));
+    }
+
+    @Override
+    public Optional<DisplayCountryDto> update(Long id,CountryCreateDto countryCreateDto) {
+        Country country = countryRepository.findById(id).orElse(null);
+        country.setName(countryCreateDto.name());
+        country.setContinent(countryCreateDto.continent());
+        return Optional.of(DisplayCountryDto.from(countryRepository.save(country)));
+    }
+
+    @Override
+    public void deltete(Long id) {
+        countryRepository.deleteById(id);
     }
 }

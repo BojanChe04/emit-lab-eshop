@@ -69,6 +69,7 @@ public class ImplBookService implements BookService {
                     book.setAuthor(author);
                     book.setAvailableCopies(createBookDto.availableCopies());
                     book.setDatePublished(createBookDto.datePublished());
+                    book.setBookState(createBookDto.bookState());
                     return bookRepository.save(book);
                 })
                 .map(DisplayBookDto::from);

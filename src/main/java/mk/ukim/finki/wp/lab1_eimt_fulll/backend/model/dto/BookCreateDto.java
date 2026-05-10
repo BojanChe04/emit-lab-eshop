@@ -27,8 +27,8 @@ public record BookCreateDto(
 
         @Min(0)
         Integer availableCopies,
-        LocalDate datePublished
-
+        LocalDate datePublished,
+        BookState bookState
 
 ) {
 
@@ -39,7 +39,7 @@ public record BookCreateDto(
         book.setCategory(category);
         book.setAuthor(author);
         book.setAvailableCopies(availableCopies);
-        book.setBookState(BookState.GOOD);
+        book.setBookState(bookState != null ? bookState : BookState.GOOD);
         book.setDatePublished(datePublished);
         return book;
     }
