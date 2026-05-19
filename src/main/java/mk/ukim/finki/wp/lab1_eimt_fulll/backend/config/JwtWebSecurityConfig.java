@@ -212,7 +212,8 @@ public class JwtWebSecurityConfig {
                                         "/api/authors/delete/**",
                                         "/api/countries/add",
                                         "/api/countries/edit/**",
-                                        "/api/countries/delete/**"
+                                        "/api/countries/delete/**",
+                                        "/api/wishlist/**"
                                 )
                                 .hasRole("ADMIN")
                                 .anyRequest()
